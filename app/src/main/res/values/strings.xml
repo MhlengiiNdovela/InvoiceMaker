@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Invoice Maker</string>
+    <string name="english">English</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="appearance">Appearance</string>
+    <string name="currency">Currency</string>
+    <string name="language_taal">Language / Taal</string>
+    <string name="afrikaans">Afrikaans</string>
 </resources>
