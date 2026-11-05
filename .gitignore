@@ -2,6 +2,7 @@
 *.apk
 *.aar
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.bundle
 build/
 
