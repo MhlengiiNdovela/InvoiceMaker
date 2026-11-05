@@ -63,8 +63,11 @@ class AuthViewModel(
     }
 
     fun logout() {
-        authRepository.logout()
+        val session = authRepository.beginLogout()
         uiState = AuthUiState.Idle
+        if (session != null) {
+            viewModelScope.launch { authRepository.revoke(session) }
+        }
     }
 
     fun resetState() {

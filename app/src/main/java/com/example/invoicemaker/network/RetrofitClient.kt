@@ -1,5 +1,6 @@
 package com.example.invoicemaker.network
 
+import com.example.invoicemaker.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -7,7 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Single place that builds and exposes our Retrofit-backed API clients.
- * Two different base URLs -> two different Retrofit instances.
  */
 object RetrofitClient {
 
@@ -18,6 +18,30 @@ object RetrofitClient {
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .build()
+
+    private val supabaseClient = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BASIC
+        })
+        .build()
+
+    private val supabaseRetrofit: Retrofit by lazy {
+        val raw = BuildConfig.SUPABASE_URL.trim()
+        val baseUrl = if (raw.startsWith("http")) raw.trimEnd('/') + "/" else "http://localhost/"
+        Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(supabaseClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    val supabaseAuth: SupabaseAuthApi by lazy {
+        supabaseRetrofit.create(SupabaseAuthApi::class.java)
+    }
+
+    val supabaseInvoices: SupabaseInvoiceApi by lazy {
+        supabaseRetrofit.create(SupabaseInvoiceApi::class.java)
+    }
 
     // --- Exchange Rate API ---
     private val exchangeRateRetrofit = Retrofit.Builder()
