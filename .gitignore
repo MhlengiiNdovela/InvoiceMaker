@@ -1,0 +1,34 @@
+# Built artifacts
+*.apk
+*.aar
+*.jar
+*.bundle
+build/
+
+# Gradle directories and files
+.gradle/
+/local.properties
+/captures/
+.externalNativeBuild/
+.cxx/
+*.kmdf
+*.kof
+
+# Android Studio / IntelliJ IDEA files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Log files
+*.log
+
+#Head bumps
+*.hprof
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Secrets & configuration files
+google-services.json
