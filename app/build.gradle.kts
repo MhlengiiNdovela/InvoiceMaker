@@ -20,7 +20,7 @@ fun configValue(name: String): String {
 
 android {
     namespace = "com.example.invoicemaker"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.example.invoicemaker"
