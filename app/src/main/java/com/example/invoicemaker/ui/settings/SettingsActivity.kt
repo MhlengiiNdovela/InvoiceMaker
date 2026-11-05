@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.invoicemaker.util.LocaleHelper
 import com.google.android.material.switchmaterial.SwitchMaterial
+import androidx.core.content.edit
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -51,7 +52,7 @@ class SettingsActivity : AppCompatActivity() {
         switchDarkMode.isChecked = isDarkMode
 
         switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit().putBoolean("KEY_DARK_MODE", isChecked).apply()
+            prefs.edit { putBoolean("KEY_DARK_MODE", isChecked) }
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
@@ -73,7 +74,7 @@ class SettingsActivity : AppCompatActivity() {
         spinnerCurrency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedCode = currencyCodes[position]
-                prefs.edit().putString("KEY_CURRENCY", selectedCode).apply()
+                prefs.edit { putString("KEY_CURRENCY", selectedCode) }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
