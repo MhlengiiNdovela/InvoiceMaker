@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 val localProperties = Properties().apply {
@@ -19,7 +20,7 @@ fun configValue(name: String): String {
 
 android {
     namespace = "com.example.invoicemaker"
-    compileSdk = 37
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.invoicemaker"
